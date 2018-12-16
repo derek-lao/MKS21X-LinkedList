@@ -3,7 +3,7 @@ public class MyLinkedList{
   private Node start,end;
   private int length;
 
-  public void initiate(){
+  private void initiate(){
     this.start.setPrev(null);
     this.end.setNext(null);
   }
@@ -30,13 +30,15 @@ public class MyLinkedList{
   //note you don't have get(index) yet, nor would you want to use it here
   public String toString(){
     String answer="["+start.get();
-    for(Node current=start;current.next()!=null;current=current.next())
+    for(Node current=start;current.hasNext();current=current.next())
     {
       answer+=(","+current.get());
     }
     return answer+"]";
   }
-  public Integer get(int index){}
+  public Integer get(int index){
+    for(Node current=start,int i=0;i!=index;)
+  }
   public Integer set(int index,Integer value){}
 
   public boolean contains(Integer value){}
@@ -47,6 +49,10 @@ public class MyLinkedList{
   public boolean remove(Integer value){} //indexOf() would also be useful
 
   public boolean hasNext(){
-
+    return this.next()!=null;
   }
+  public boolean hasPrev(){
+    return this.prev()!=null;
+  }
+
 }
