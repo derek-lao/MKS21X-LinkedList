@@ -6,7 +6,7 @@ public class Node{
   public Node(Integer element){
     data=element;
   }
-  
+
   public Node next(){
     return this.next;
   }
@@ -20,4 +20,8 @@ public class Node{
     this.prev=other;
   }
   public String toString(){}
+
+  public Integer get(){
+    return this.data;
+  }
 }

@@ -3,6 +3,11 @@ public class MyLinkedList{
   private Node start,end;
   private int length;
 
+  public void initiate(){
+    this.start.setPrev(null);
+    this.end.setNext(null);
+  }
+
   public MyLinkedList(){
     length=0;
   }
@@ -21,8 +26,16 @@ public class MyLinkedList{
   public int size(){
     return length;
   }
+
   //note you don't have get(index) yet, nor would you want to use it here
-  public String toString(){}
+  public String toString(){
+    String answer="["+start.get();
+    for(Node current=start;current.next()!=null;current=current.next())
+    {
+      answer+=(","+current.get());
+    }
+    return answer+"]";
+  }
   public Integer get(int index){}
   public Integer set(int index,Integer value){}
 
@@ -32,4 +45,8 @@ public class MyLinkedList{
   public void add(int index,Integer value){}
   public Integer remove(int index){}
   public boolean remove(Integer value){} //indexOf() would also be useful
+
+  public boolean hasNext(){
+
+  }
 }
