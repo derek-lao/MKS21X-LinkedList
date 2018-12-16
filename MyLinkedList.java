@@ -42,6 +42,7 @@ public class MyLinkedList{
       current.next();
       i++;
     }
+    return current.get();
   }
   public Integer set(int index,Integer value){}
 
