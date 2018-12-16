@@ -24,6 +24,9 @@ public class Node{
   public Integer get(){
     return this.data;
   }
+  public void set(Integer value){
+    this.data=value;
+  }
 
   public boolean hasNext(){
     return this.next()!=null;

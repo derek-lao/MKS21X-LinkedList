@@ -35,16 +35,17 @@ public class MyLinkedList{
     return answer+"]";
   }
   public Integer get(int index){
-    Node current=start;
-    int i=0;
-    while(i<index && current.hasNext())
-    {
-      current.next();
-      i++;
-    }
-    return current.get();
+    return this.getNode(index).get();
   }
-  public Integer set(int index,Integer value){}
+
+  /**
+  * @return the element previously at the specified positions
+  */
+  public Integer set(int index,Integer value){
+    Integer originalValue=this.getNode(index).get();
+    this.getNode(index).set(value);
+    return originalValue;
+  }
 
   public boolean contains(Integer value){}
   public int indexOf(Integer value){}
@@ -54,10 +55,23 @@ public class MyLinkedList{
   public boolean remove(Integer value){} //indexOf() would also be useful
 
 
+  // helper function to clearly set the start and next nodes
   private void initiate(){
     this.start.setPrev(null);
     this.end.setNext(null);
   }
-
+  // helper function to loop through the linked list to get a node
+  // at a specific index.  That node would be used for whatever it needs
+  // to be used for in other methods, such as get(index) and set(value,index)
+  private Node getNode(int index){
+    Node current=start;
+    int i=0;
+    while(i<index && current.hasNext())
+    {
+      current=current.next();
+      i++;
+    }
+    return current;
+  }
 
 }
