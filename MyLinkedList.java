@@ -109,6 +109,7 @@ public class MyLinkedList{
   public boolean remove(Integer value){} //indexOf() would also be useful
 
 
+
   // helper function to clearly set the start and next nodes
   private void initiate(){
     this.start.setPrev(null);
