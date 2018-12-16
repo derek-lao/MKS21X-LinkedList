@@ -47,7 +47,9 @@ public class MyLinkedList{
     return originalValue;
   }
 
-  public boolean contains(Integer value){}
+  public boolean contains(Integer value){
+    return this.toString().contains(value+"");
+  }
   public int indexOf(Integer value){}
 
   public void add(int index,Integer value){}
