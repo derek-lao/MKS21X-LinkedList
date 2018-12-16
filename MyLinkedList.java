@@ -3,13 +3,10 @@ public class MyLinkedList{
   private Node start,end;
   private int length;
 
-  private void initiate(){
-    this.start.setPrev(null);
-    this.end.setNext(null);
-  }
 
   public MyLinkedList(){
     length=0;
+    initiate();
   }
 
   /** adds the specified element to the end of the list
@@ -21,6 +18,7 @@ public class MyLinkedList{
   public boolean add(Integer value){
     Node answer=new Node(value);
     end.setNext(answer);
+    length++;
     return true;
   }
   public int size(){
@@ -37,7 +35,13 @@ public class MyLinkedList{
     return answer+"]";
   }
   public Integer get(int index){
-    for(Node current=start,int i=0;i!=index;)
+    Node current=start;
+    int i=0;
+    while(i<index && current.hasNext())
+    {
+      current.next();
+      i++;
+    }
   }
   public Integer set(int index,Integer value){}
 
@@ -48,11 +52,11 @@ public class MyLinkedList{
   public Integer remove(int index){}
   public boolean remove(Integer value){} //indexOf() would also be useful
 
-  public boolean hasNext(){
-    return this.next()!=null;
+
+  private void initiate(){
+    this.start.setPrev(null);
+    this.end.setNext(null);
   }
-  public boolean hasPrev(){
-    return this.prev()!=null;
-  }
+
 
 }

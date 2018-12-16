@@ -24,4 +24,11 @@ public class Node{
   public Integer get(){
     return this.data;
   }
+
+  public boolean hasNext(){
+    return this.next()!=null;
+  }
+  public boolean hasPrev(){
+    return this.prev()!=null;
+  }
 }
