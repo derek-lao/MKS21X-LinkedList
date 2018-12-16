@@ -47,8 +47,23 @@ public class MyLinkedList{
     return originalValue;
   }
 
+  /*
+  this is actually an interesting way to figure out contains, using toString
+  but it is actually a bit slower than if we just cycle through the whole list
+  and see if it is contained
+
+  // public boolean contains(Integer value){
+  //   return this.toString().contains(value+"");
+  // }
+  */
+
   public boolean contains(Integer value){
-    return this.toString().contains(value+"");
+    for(Node current=start;current.hasNext();current=current.next())
+    {
+      if(current.get()==value)
+      return true;
+    }
+    return false;
   }
   public int indexOf(Integer value){}
 
