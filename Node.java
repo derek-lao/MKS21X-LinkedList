@@ -5,6 +5,8 @@ public class Node{
 
   public Node(Integer element){
     data=element;
+    next=null;
+    prev=null;
   }
 
   public Node next(){
@@ -19,7 +21,9 @@ public class Node{
   public void setPrev(Node other){
     this.prev=other;
   }
-  public String toString(){}
+  public String toString(){
+    return ""+this.get();
+  }
 
   public Integer get(){
     return this.data;

@@ -6,7 +6,7 @@ public class MyLinkedList{
 
   public MyLinkedList(){
     length=0;
-    initiate();
+    //initiate();
   }
 
   /** adds the specified element to the end of the list
@@ -15,8 +15,18 @@ public class MyLinkedList{
   * with data as the element
   */
   public boolean add(Integer value){
-    Node answer=new Node(value);
-    end.setNext(answer);
+    if(length==0)
+    {
+      start=new Node(value);
+      end=start;
+      length++;
+      return true;
+    }
+    Node holder=end;
+    end=new Node(value);
+    holder.setNext(end);
+    end.setPrev(holder);
+    end.setNext(null);
     length++;
     return true;
   }
@@ -33,6 +43,8 @@ public class MyLinkedList{
   *@return a string in the form of [element,element,element]
   */
   public String toString(){
+    if(length==0)
+    return "[]";
     String answer="["+start.get();
     for(Node current=start;current.hasNext();current=current.next())
     {
@@ -104,9 +116,62 @@ public class MyLinkedList{
     }
     return -1;
   }
-  public void add(int index,Integer value){}
-  public Integer remove(int index){}
-  public boolean remove(Integer value){} //indexOf() would also be useful
+  /**
+  *Inserts the specified element at the specified position in this list.
+  Shifts the element currently at that position (if any) and any
+  subsequent elements to the right (adds one to their indices).
+  *
+  */
+
+  public void add(int index,Integer value){
+    if(index==length)
+    this.add(value);
+    else
+    {
+      Node current=this.getNode(index);
+      Node currentPrev=current.prev();
+      Node answer=new Node(value);
+      answer.setPrev(currentPrev);
+      currentPrev.setNext(answer);
+      answer.setNext(current);
+      current.setPrev(answer);
+    }
+  }
+
+  /**
+  *changes reference points in the code
+  *remove Node at given index, returns removed element
+  *@param index is the specified index
+  *@return the removed element
+  */
+  public Integer remove(int index){
+    Node current=this.getNode(index);
+    Node currentNext=current.next();
+    Node currentPrev=current.prev();
+    Integer answer=current.get();
+    currentPrev.setNext(currentNext);
+    currentNext.setPrev(currentPrev);
+    return answer;
+  }
+
+  /**
+  *Removes the first occurrence of the specified element from this list,
+  if it is present.
+  If this list does not contain the element, it is unchanged
+  *@param value is the element to be removed
+  *@return true if the list includes the element, and false if not
+  */
+  public boolean remove(Integer value){
+    if(this.contains(value))
+    {
+      this.remove(this.indexOf(value));
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  } //indexOf() would also be useful
 
 
 
