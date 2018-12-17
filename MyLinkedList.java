@@ -19,15 +19,25 @@ public class MyLinkedList{
     {
       start=new Node(value);
       end=start;
+      start.setNext(end);
+      start.setPrev(null);
+      end.setPrev(start);
+      end.setNext(null);
       length++;
       return true;
     }
     Node holder=end;
-    end=new Node(value);
+    Node endPrev=end.prev();
+    holder.setPrev(end.prev());
     holder.setNext(end);
+    end=new Node(value);
     end.setPrev(holder);
     end.setNext(null);
+    holder.setPrev(endPrev);
+    endPrev.setNext(holder);
     length++;
+    System.out.println("Element to be added: "+value);
+    System.out.println("List now: "+this.toString());
     return true;
   }
 
@@ -135,6 +145,7 @@ public class MyLinkedList{
       currentPrev.setNext(answer);
       answer.setNext(current);
       current.setPrev(answer);
+      length++;
     }
   }
 
