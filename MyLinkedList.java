@@ -27,17 +27,18 @@ public class MyLinkedList{
       return true;
     }
     Node holder=end;
+    System.out.println("The holder has "+holder.get());
     Node endPrev=end.prev();
-    holder.setPrev(end.prev());
-    holder.setNext(end);
-    end=new Node(value);
-    end.setPrev(holder);
-    end.setNext(null);
     holder.setPrev(endPrev);
     endPrev.setNext(holder);
+    end=new Node(value);
+    System.out.println("The new end has "+end.get());
+    end.setPrev(holder);
+    holder.setNext(end);
+    end.setNext(null);
     length++;
-    System.out.println("Element to be added: "+value);
-    System.out.println("List now: "+this.toString());
+    // System.out.println("Element to be added: "+value);
+    // System.out.println("List now: "+this.toString());
     return true;
   }
 
@@ -56,9 +57,13 @@ public class MyLinkedList{
     if(length==0)
     return "[]";
     String answer="["+start.get();
-    for(Node current=start;current.hasNext();current=current.next())
+    Node current=start;
+    int i=1;
+    while(current.hasNext()&&i<length)
     {
+      current=current.next();
       answer+=(","+current.get());
+      i++;
     }
     return answer+"]";
   }
@@ -84,16 +89,6 @@ public class MyLinkedList{
     this.getNode(index).set(value);
     return originalValue;
   }
-
-  /*
-  this is actually an interesting way to figure out contains, using toString
-  but it is actually a bit slower than if we just cycle through the whole list
-  and see if it is contained
-
-  // public boolean contains(Integer value){
-  //   return this.toString().contains(value+"");
-  // }
-  */
 
   /**
   *check if the value is contained in the list at all
@@ -126,13 +121,14 @@ public class MyLinkedList{
     }
     return -1;
   }
+
   /**
   *Inserts the specified element at the specified position in this list.
   Shifts the element currently at that position (if any) and any
   subsequent elements to the right (adds one to their indices).
-  *
+  *@param index is the specified position
+  *@param value is the element to be inserted
   */
-
   public void add(int index,Integer value){
     if(index==length)
     this.add(value);
