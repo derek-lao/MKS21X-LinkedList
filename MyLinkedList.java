@@ -6,7 +6,7 @@ public class MyLinkedList{
 
   public MyLinkedList(){
     length=0;
-    //initiate();
+    // initiate();
   }
 
   /** adds the specified element to the end of the list
@@ -36,6 +36,7 @@ public class MyLinkedList{
     end.setPrev(holder);
     holder.setNext(end);
     end.setNext(null);
+    start.setPrev(null);
     length++;
     // System.out.println("Element to be added: "+value);
     // System.out.println("List now: "+this.toString());
@@ -136,19 +137,35 @@ public class MyLinkedList{
   public void add(int index,Integer value){
     if(index<0||index>length)
     throw new IndexOutOfBoundsException();
+    // System.out.println("List before: "+this.toString());
     if(index==length)
     this.add(value);
     else
     {
       Node current=this.getNode(index);
-      Node currentPrev=current.prev();
+      // System.out.println("My data in my current node I am looking at is: "+current.get());
+      // System.out.println("Does my current hasPrev? Expecting false: "+current.hasPrev());
+      // System.out.println("Does my start hasPrev? Expecting false: "+start.hasPrev());
       Node answer=new Node(value);
-      currentPrev.setNext(answer);
-      answer.setPrev(currentPrev);
-      current.setPrev(answer);
-      answer.setNext(current);
+      if(current.hasPrev())
+      {
+        Node currentPrev=current.prev();
+        currentPrev.setNext(answer);
+        answer.setPrev(currentPrev);
+        current.setPrev(answer);
+        answer.setNext(current);
+      }
+      else
+      {
+        start=new Node(value);
+        // System.out.println("The data in this new start node is: "+start.get());
+        current.setPrev(start);
+        start.setNext(current);
+        start.setPrev(null);
+      }
       length++;
     }
+    // System.out.println("List after: "+this.toString());
   }
 
   /**
