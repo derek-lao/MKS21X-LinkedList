@@ -27,12 +27,12 @@ public class MyLinkedList{
       return true;
     }
     Node holder=end;
-    System.out.println("The holder has "+holder.get());
+    // System.out.println("The holder has "+holder.get());
     Node endPrev=end.prev();
     holder.setPrev(endPrev);
     endPrev.setNext(holder);
     end=new Node(value);
-    System.out.println("The new end has "+end.get());
+    // System.out.println("The new end has "+end.get());
     end.setPrev(holder);
     holder.setNext(end);
     end.setNext(null);
@@ -74,6 +74,8 @@ public class MyLinkedList{
   *@return the element at that specified position
   */
   public Integer get(int index){
+    if(index<0||index>=length)
+    throw new IndexOutOfBoundsException();
     return this.getNode(index).get();
   }
 
@@ -85,6 +87,8 @@ public class MyLinkedList{
   *@return the element previously at the specified positions
   */
   public Integer set(int index,Integer value){
+    if(index<0||index>=length)
+    throw new IndexOutOfBoundsException();
     Integer originalValue=this.getNode(index).get();
     this.getNode(index).set(value);
     return originalValue;
@@ -130,6 +134,8 @@ public class MyLinkedList{
   *@param value is the element to be inserted
   */
   public void add(int index,Integer value){
+    if(index<0||index>length)
+    throw new IndexOutOfBoundsException();
     if(index==length)
     this.add(value);
     else
@@ -137,10 +143,10 @@ public class MyLinkedList{
       Node current=this.getNode(index);
       Node currentPrev=current.prev();
       Node answer=new Node(value);
-      answer.setPrev(currentPrev);
       currentPrev.setNext(answer);
-      answer.setNext(current);
+      answer.setPrev(currentPrev);
       current.setPrev(answer);
+      answer.setNext(current);
       length++;
     }
   }
@@ -152,6 +158,8 @@ public class MyLinkedList{
   *@return the removed element
   */
   public Integer remove(int index){
+    if(index<0||index>=length)
+    throw new IndexOutOfBoundsException();
     Node current=this.getNode(index);
     Node currentNext=current.next();
     Node currentPrev=current.prev();
@@ -180,7 +188,17 @@ public class MyLinkedList{
     }
   } //indexOf() would also be useful
 
-
+  public void extend(MyLinkedList other){
+          //in O(1) runtime, move the elements from other onto the end of this
+          //The size of other is reduced to 0
+          //The size of this is now the combined sizes of both original lists
+    this.end.setNext(other.start);
+    other.start.setPrev(this.end);
+    this.length=this.length+other.size();
+    other.length=0;
+    other.start.setPrev(null);
+    other.end.setNext(null);
+  }
 
   // helper function to clearly set the start and next nodes
   private void initiate(){
