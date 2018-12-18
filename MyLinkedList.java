@@ -177,13 +177,34 @@ public class MyLinkedList{
   public Integer remove(int index){
     if(index<0||index>=length)
     throw new IndexOutOfBoundsException();
-    Node current=this.getNode(index);
-    Node currentNext=current.next();
-    Node currentPrev=current.prev();
-    Integer answer=current.get();
-    currentPrev.setNext(currentNext);
-    currentNext.setPrev(currentPrev);
-    return answer;
+    else{
+      Node current=this.getNode(index);
+      Integer answer=current.get();
+      if(index==length-1)
+      {
+        Node currentPrev=current.prev();
+        end.set(currentPrev.get());
+        end.setPrev(currentPrev.prev());
+        end.setNext(null);
+        return answer;
+      }
+      if(index==0)
+      {
+        Node currentNext=current.next();
+        start.set(currentNext.get());
+        start.setNext(currentNext.next());
+        start.setPrev(null);
+        return answer;
+      }
+      else
+      {
+        Node currentNext=current.next();
+        Node currentPrev=current.prev();
+        currentPrev.setNext(currentNext);
+        currentNext.setPrev(currentPrev);
+        return answer;
+      }
+    }
   }
 
   /**
